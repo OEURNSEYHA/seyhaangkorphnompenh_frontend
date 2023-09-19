@@ -12,6 +12,7 @@ function App() {
       <Routes>
        
           <Route path="/login" element={<LoginForm/>}/>
+          
           <PrivateRoute path="/dashboard" element={<Dashboard/>} />
           {/* <Redirect from="/" to="/login" /> */}
           
