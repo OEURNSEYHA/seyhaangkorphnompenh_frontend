@@ -3,7 +3,7 @@ import React, { createContext, useContext, useReducer } from 'react';
 import { AuthReducer } from './AuthReducer';
 
 
-const AuthContext = createContext("hello");
+const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const initialState = {
