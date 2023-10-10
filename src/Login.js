@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ApiRequest } from "./ApiRequest";
 function Login() {
@@ -9,29 +9,10 @@ function Login() {
 
   const handleLogin = async () => {
     try {
-      // const response = await axios.post(`http://localhost:8080/user/login`, { email, password });
-      // axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
-      // navigate("/data")
-      // console.log(response.data.token)
-
-      const response = await ApiRequest(
-        "POST",
-        "user/login",
-        { email, password },
-        null
-      );
-
-
-      localStorage.setItem("token", response.token);
-
-      const token = localStorage.getItem("token");
-
-      console.log(token);
-
       const secondRespons = await ApiRequest("POST", "user/login", {
         email,
         password,
-      });
+      }, null);
       console.log(secondRespons);
 
       navigate("/data");
@@ -42,9 +23,6 @@ function Login() {
       setError("Invalid email or password");
     }
   };
-  const token = localStorage.getItem("token");
-
-  console.log(token);
 
   return (
     <div>

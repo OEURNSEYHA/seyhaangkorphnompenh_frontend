@@ -5,8 +5,6 @@ import Data from "./Data";
 function App() {
   return <>
     <Routes>
-
-
       <Route path="/login" element={<Login/>}/>
       <Route path="/data" element={<Data/>}/>
     </Routes>
