@@ -3,14 +3,14 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ApiRequest } from "./ApiRequest";
 
-function Data() {
+function  Data() {
   const [data, setData] = useState([]);
 
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
 
-  console.log(token);
-  const handleLogout = async () => {
+
+
+  const  handleLogout = async () => {
     try {
       // Send a request to the logout endpoint to invalidate the token
       await axios.post(`http://localhost:8080/user/logout`);
@@ -22,30 +22,30 @@ function Data() {
       console.error(error.response.data.message);
     }
   };
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExNTM1ZDhkMTczZDhlMzFjZDdmN2YiLCJlbWFpbCI6InJhdGhhbmFrQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJC5wNC4zZEJuRU9DN2M2dWRIWDhBRC5uRzFuQ3NIMldyZUxIT0tySld1aGVSTVAzLkllQnR5IiwiaWF0IjoxNjk2OTU3MTU4LCJleHAiOjE2OTc1NjE5NTh9.wqJuqxPOxOTO3XSqDD-j7UbyEPt5aeJ-IhXeeBu30cw';
 
-  const response = await ApiRequest(
-    "GET",
-    "http://localhost:8080/users",
-    null,
-    ""
-  )
+const fetchData = async () => {
+  try {
+    const response = await axios.get('http://localhost:8080/users', {
+      headers: {
+        Cookie: `accessToken=${token}`,
+      },
+      withCredentials: true,
+    });
+    setData(response.data);
+  } catch (error) {
+    // Handle the error
+  }
+};
 
-  useEffect(()=>{
-    
-  },[]);
-
-  const datas = async () => {
-    try {
-      const datas = await ApiRequest("GET", "/users", null, token);
-      // Now 'datas' contains the data from the API response
-      datas.map((item) => console.log(item.email));
-    } catch (error) {
-      console.log(error);
-    }
-  };
   useEffect(() => {
-    return datas;
+    fetchData();
   }, []);
+
+
+
+
+
   return (
     <div>
       {console.log(data)}

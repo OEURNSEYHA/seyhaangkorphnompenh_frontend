@@ -12,7 +12,7 @@ function Login() {
       const secondRespons = await ApiRequest("POST", "user/login", {
         email,
         password,
-      }, null);
+      });
       console.log(secondRespons);
 
       navigate("/data");
@@ -23,7 +23,7 @@ function Login() {
       setError("Invalid email or password");
     }
   };
-
+console.log(email, password)
   return (
     <div>
       {error && <p>{error}</p>}

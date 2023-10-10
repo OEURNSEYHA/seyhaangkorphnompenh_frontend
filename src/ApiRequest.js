@@ -9,9 +9,11 @@ export async function ApiRequest(method, endpoint, data = null, token) {
     const axiosInstance = axios.create({
       baseURL: BASE_URL,
       headers: {
-        'Authorization': `Bearer ${token}`,
+        // 'Authorization': `Bearer ${token}`,
+        'Cookie': `accessToken=${token}`,
         // Add any other headers you need
       },
+      withCredentials: true, // This is important for sending cookies
     });
 
     let response;
